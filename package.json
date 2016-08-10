@@ -1,0 +1,41 @@
+{
+  "name": "file-or-stdin",
+  "version": "1.0.0",
+  "description": "Read a file, or read stdin if no files are specified",
+  "repository": "shinnn/file-or-stdout",
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+  "scripts": {
+    "pretest": "eslint --fix --config @shinnn/node index.js test.js test-stdin.js",
+    "test-only": "node --strong_mode test.js && node --strong_mode test-stdin.js < .gitattributes",
+    "test": "npm run-script test-only --silent",
+    "coverage": "nyc npm run-script test-only --silent"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "file",
+    "stdin",
+    "read",
+    "console",
+    "input",
+    "in",
+    "fallback",
+    "promise",
+    "promises",
+    "then",
+    "thenable"
+  ],
+  "dependencies": {
+    "get-stdin": "^5.0.1",
+    "graceful-fs": "^4.1.5"
+  },
+  "devDependencies": {
+    "@shinnn/eslint-config-node": "^3.0.0",
+    "eslint": "^3.2.2",
+    "loud-rejection": "^1.6.0",
+    "nyc": "^7.1.0",
+    "tape": "^4.6.0"
+  }
+}
