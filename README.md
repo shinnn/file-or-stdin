@@ -32,13 +32,13 @@ npm install file-or-stdin
 ## API
 
 ```javascript
-const fileOrStdout = require('file-or-stdin');
+const fileOrStdin = require('file-or-stdin');
 ```
 
 ### fileOrStdin(*filePath* [, *options*])
 
 *filePath*: `String` or a falsy value  
-*options*: `Object` ([`fs.writeFile`](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback) options) or `String` (encoding)   
+*options*: `Object` ([`fs.readFile`](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback) options) or `String` (encoding)   
 Return: [`Promise`](https://promisesaplus.com/)
 
 When the first argument is a file path, it reads the given file and returns a promise of the file contents.
@@ -55,7 +55,7 @@ fileOrStdin('', 'utf8').then(data => {
 ```javascript
 // echo "nodejs" | node example.js
 fileOrStdin('', 'base64').then(data => {
-  isFileWritten; //=> 'bm9kZWpz'
+  data; //=> 'bm9kZWpz'
 });
 ```
 
