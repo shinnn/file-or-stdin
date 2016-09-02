@@ -1,4 +1,4 @@
-'use strong';
+'use strict';
 
 const fileOrStdin = require('.');
 const {test} = require('tape');

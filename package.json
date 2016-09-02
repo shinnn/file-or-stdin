@@ -6,7 +6,7 @@
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
     "pretest": "eslint --fix --config @shinnn/node index.js test.js test-stdin.js",
-    "test-only": "node --strong_mode test.js && node --strong_mode test-stdin.js < .gitattributes",
+    "test-only": "node test.js && node test-stdin.js < .gitattributes",
     "test": "npm run-script test-only --silent",
     "coverage": "nyc npm run-script test-only --silent"
   },
