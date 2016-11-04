@@ -5,7 +5,7 @@
   "repository": "shinnn/file-or-stdout",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "eslint --fix --config @shinnn/node index.js test.js test-stdin.js",
+    "pretest": "eslint --fix --format=codeframe index.js test.js test-stdin.js",
     "test-only": "node test.js && node test-stdin.js < .gitattributes",
     "test": "npm run-script test-only --silent",
     "coverage": "nyc npm run-script test-only --silent"
@@ -33,9 +33,12 @@
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.4.0",
+    "eslint": "^3.9.1",
     "loud-rejection": "^1.6.0",
-    "nyc": "^8.1.0",
-    "tape": "^4.6.0"
+    "nyc": "^8.4.0",
+    "tape": "^4.6.2"
+  },
+  "eslintConfig": {
+    "extends": "@shinnn/node"
   }
 }
