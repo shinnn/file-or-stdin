@@ -33,10 +33,10 @@
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.9.1",
+    "eslint": "^3.12.2",
     "loud-rejection": "^1.6.0",
-    "nyc": "^8.4.0",
-    "tape": "^4.6.2"
+    "nyc": "^10.0.0",
+    "tape": "^4.6.3"
   },
   "eslintConfig": {
     "extends": "@shinnn/node"
