@@ -48,7 +48,7 @@ test('fileOrStdin', t => {
   fileOrStdin('file_path', '').then(t.fail, err => {
     t.strictEqual(
       err.message,
-      'Expected a valid encoding (for example `utf8` and `base64`), but got an empty string.',
+      'Expected a valid encoding (for example `utf8` and `base64`), but got \'\' (empty string).',
       'should fail when the second argument is an empty string.'
     );
   }).catch(t.fail);

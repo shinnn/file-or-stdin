@@ -29,7 +29,8 @@
   ],
   "dependencies": {
     "get-stdin": "^5.0.1",
-    "graceful-fs": "^4.1.6"
+    "graceful-fs": "^4.1.6",
+    "inspect-with-kind": "^1.0.0"
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
