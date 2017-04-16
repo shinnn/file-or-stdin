@@ -1,8 +1,8 @@
 {
   "name": "file-or-stdin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Read a file, or read stdin if no files are specified",
-  "repository": "shinnn/file-or-stdout",
+  "repository": "shinnn/file-or-stdin",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
     "pretest": "eslint --fix --format=codeframe index.js test.js test-stdin.js",
@@ -19,6 +19,9 @@
     "stdin",
     "read",
     "console",
+    "content",
+    "contents",
+    "buffer",
     "input",
     "in",
     "fallback",
@@ -34,9 +37,9 @@
   },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
-    "eslint": "^3.12.2",
+    "eslint": "^3.19.0",
     "loud-rejection": "^1.6.0",
-    "nyc": "^10.0.0",
+    "nyc": "^10.2.0",
     "tape": "^4.6.3"
   },
   "eslintConfig": {
