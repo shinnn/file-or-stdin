@@ -31,6 +31,11 @@ module.exports = function fileOrStdin(filePath, options) {
   }
 
   const encoding = typeof options === 'string' ? options : (options || {}).encoding;
+
+  if (/^utf-?8$/i.test(encoding)) {
+    return getStdin();
+  }
+
   const promise = getStdin.buffer();
 
   if (encoding) {

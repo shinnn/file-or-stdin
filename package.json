@@ -7,8 +7,7 @@
   "scripts": {
     "pretest": "eslint --fix --format=codeframe index.js test.js test-stdin.js",
     "test-only": "node test.js && node test-stdin.js < .gitattributes",
-    "test": "npm run-script test-only --silent",
-    "coverage": "nyc npm run-script test-only --silent"
+    "test": "nyc --reporter=html --reporter=text npm run-script test-only --silent"
   },
   "license": "MIT",
   "files": [
