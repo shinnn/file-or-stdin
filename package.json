@@ -1,6 +1,6 @@
 {
   "name": "file-or-stdin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Read a file, or read stdin if no files are specified",
   "repository": "shinnn/file-or-stdin",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
