@@ -8,7 +8,7 @@ test('fileOrStdin', t => {
 
   fileOrStdin(null).then(data => {
     t.ok(
-      data.equals(new Buffer(0)),
+      data.equals(Buffer.alloc(0)),
       'should be resolve with an emtpty buffer when no data is passed to stdin.'
     );
   }).catch(t.fail);
