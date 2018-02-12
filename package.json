@@ -9,7 +9,7 @@
     "test-only": "node test.js && node test-stdin.js < .gitattributes",
     "test": "nyc --reporter=html --reporter=text npm run-script test-only --silent"
   },
-  "license": "MIT",
+  "license": "ISC",
   "files": [
     "index.js"
   ],
