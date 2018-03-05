@@ -3,53 +3,80 @@
 const fileOrStdin = require('.');
 const {test} = require('tape');
 
-test('fileOrStdin', t => {
-	t.plan(6);
+test('fileOrStdin', async t => {
+	t.ok(
+		(await fileOrStdin(null)).equals(Buffer.alloc(0)),
+		'should be resolve with an emtpty buffer when no data is passed to stdin.'
+	);
 
-	fileOrStdin(null).then(data => {
-		t.ok(
-			data.equals(Buffer.alloc(0)),
-			'should be resolve with an emtpty buffer when no data is passed to stdin.'
-		);
-	}).catch(t.fail);
+	t.equal(
+		await fileOrStdin(null, 'ucs2'),
+		'',
+		'should be resolve with an emtpty string when no data is passed to stdin and encoding is specified.'
+	);
 
-	fileOrStdin(null, 'ucs2').then(data => {
-		t.equal(
-			data,
-			'',
-			'should be resolve with an emtpty string when no data is passed to stdin and encoding is specified.'
-		);
-	}).catch(t.fail);
+	t.equal(
+		await fileOrStdin('.gitattributes', 'utf8'),
+		'* text=auto\n',
+		'should read a given file.'
+	);
 
-	fileOrStdin('.gitattributes', 'utf8').then(data => {
-		t.equal(
-			data,
-			'* text=auto\n',
-			'should read a given file.'
-		);
-	}).catch(t.fail);
+	const fail = t.fail.bind(t, 'Unexpectedly succeeded.');
 
-	fileOrStdin('__this/file/does/not/exist__', {}).then(t.fail, ({code}) => {
+	try {
+		await fileOrStdin('__this/file/does/not/exist__', {});
+		fail();
+	} catch ({code}) {
 		t.equal(
 			code,
 			'ENOENT',
 			'should fail when it cannot read a given file.'
 		);
-	}).catch(t.fail);
+	}
 
-	fileOrStdin('file_path', 0).then(t.fail, ({message}) => {
+	try {
+		await fileOrStdin('file_path', 0);
+		fail();
+	} catch ({message}) {
 		t.equal(
 			message,
 			'Expected an object or a string, but got 0 (number).',
 			'should fail when the second argument is neither an object nor a string.'
 		);
-	}).catch(t.fail);
+	}
 
-	fileOrStdin('file_path', '').then(t.fail, ({message}) => {
+	try {
+		await fileOrStdin('_', '');
+		fail();
+	} catch ({message}) {
 		t.equal(
 			message,
 			'Expected a valid encoding (for example `utf8` and `base64`), but got \'\' (empty string).',
 			'should fail when the second argument is an empty string.'
 		);
-	}).catch(t.fail);
+	}
+
+	try {
+		await fileOrStdin();
+		fail();
+	} catch (err) {
+		t.equal(
+			err.toString(),
+			'RangeError: Expected 1 or 2 arguments (<string|Buffer|URL>[, <Object|string>]), but got no arguments.',
+			'should fail when it takes no arguments.'
+		);
+	}
+
+	try {
+		await fileOrStdin('_', '_', '_');
+		fail();
+	} catch (err) {
+		t.equal(
+			err.toString(),
+			'RangeError: Expected 1 or 2 arguments (<string|Buffer|URL>[, <Object|string>]), but got 3 arguments.',
+			'should fail when it takes too many arguments.'
+		);
+	}
+
+	t.end();
 });
