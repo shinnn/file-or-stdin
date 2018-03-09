@@ -1,8 +1,12 @@
 'use strict';
 
+const {promisify} = require('util');
+
 const {readFile} = require('graceful-fs');
 const getStdin = require('get-stdin');
 const inspectWithKind = require('inspect-with-kind');
+
+const promisifiedReadFile = promisify(readFile);
 
 module.exports = async function fileOrStdin(...args) {
 	const argLen = args.length;
@@ -26,16 +30,7 @@ module.exports = async function fileOrStdin(...args) {
 	}
 
 	if (filePath) {
-		return new Promise((resolve, reject) => {
-			readFile(filePath, options, (err, data) => {
-				if (err) {
-					reject(err);
-					return;
-				}
-
-				resolve(data);
-			});
-		});
+		return promisifiedReadFile(...args);
 	}
 
 	const encoding = typeof options === 'string' ? options : (options || {}).encoding;
