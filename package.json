@@ -2,14 +2,14 @@
 	"name": "file-or-stdin",
 	"version": "2.0.0-2",
 	"description": "Read a file, or read stdin if no files are specified",
-	"repository": "shinnn/file-or-stdin",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
-	"scripts": {
-		"pretest": "eslint --fix --format=codeframe index.js test.js test-stdin.js",
-		"test-only": "node test.js && node test-stdin.js < .gitattributes",
-		"test": "nyc --reporter=html --reporter=text npm run-script test-only --silent"
-	},
+	"repository": "shinnn/file-or-stdin",
 	"license": "ISC",
+	"scripts": {
+		"pretest": "eslint .",
+		"test-only": "node test.js && node test-stdin.js < .gitattributes",
+		"test": "nyc npm run-script test-only --silent"
+	},
 	"files": [
 		"index.js"
 	],
@@ -31,17 +31,21 @@
 	],
 	"dependencies": {
 		"get-stdin": "^6.0.0",
-		"graceful-fs": "^4.1.11",
-		"inspect-with-kind": "^1.0.4"
+		"inspect-with-kind": "^1.0.5",
+		"is-plain-obj": "^1.1.0"
 	},
 	"devDependencies": {
-		"@shinnn/eslint-config-node": "^5.0.0",
-		"eslint": "^4.18.2",
+		"@shinnn/eslint-config": "^6.9.0",
+		"eslint": "^5.14.1",
 		"loud-rejection": "^1.6.0",
-		"nyc": "^11.5.0",
-		"tape": "^4.9.0"
+		"nyc": "^13.3.0",
+		"nyc-config-common": "^1.0.1",
+		"tape": "^4.10.1"
 	},
 	"eslintConfig": {
-		"extends": "@shinnn/node"
+		"extends": "@shinnn"
+	},
+	"nyc": {
+		"extends": "nyc-config-common"
 	}
 }

@@ -1,7 +1,7 @@
 # file-or-stdin
 
 [![npm version](https://img.shields.io/npm/v/file-or-stdin.svg)](https://www.npmjs.com/package/file-or-stdin)
-[![Build Status](https://travis-ci.org/shinnn/file-or-stdin.svg?branch=master)](https://travis-ci.org/shinnn/file-or-stdin)
+[![Build Status](https://travis-ci.com/shinnn/file-or-stdin.svg?branch=master)](https://travis-ci.com/shinnn/file-or-stdin)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/file-or-stdin.svg)](https://coveralls.io/github/shinnn/file-or-stdin?branch=master)
 
 Read a file, or read [stdin](https://nodejs.org/api/process.html#process_process_stdin) if no files are specified
@@ -18,7 +18,7 @@ const fileOrStdin = require('file-or-stdin');
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install file-or-stdin
@@ -56,4 +56,4 @@ When the first argument is a falsy value, it reads [stdin](http://www.linfo.org/
 
 ## License
 
-[ISC License](./LICENSE) © 2018 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2018 - 2019 Shinnosuke Watanabe

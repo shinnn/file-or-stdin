@@ -80,3 +80,5 @@ test('fileOrStdin', async t => {
 
 	t.end();
 });
+
+process.stdin.end();

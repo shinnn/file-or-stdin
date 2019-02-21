@@ -1,10 +1,10 @@
 'use strict';
 
 const {promisify} = require('util');
+const {readFile} = require('fs');
 
-const {readFile} = require('graceful-fs');
-const getStdin = require('get-stdin');
 const inspectWithKind = require('inspect-with-kind');
+const isPlainObj = require('is-plain-obj');
 
 const promisifiedReadFile = promisify(readFile);
 
@@ -17,33 +17,39 @@ module.exports = async function fileOrStdin(...args) {
 		} arguments.`);
 	}
 
-	const [filePath, options] = args;
+	const [filePath, options = {}] = args;
 
-	if (options !== undefined && typeof options !== 'object' && typeof options !== 'string') {
-		throw new TypeError(`Expected an object or a string, but got ${
-			inspectWithKind(options)
-		}.`);
+	if (argLen === 2) {
+		if (typeof options !== 'string' && !isPlainObj(options)) {
+			const error = new TypeError(`Expected an <Object> specifying fs.readFile() options or a <string> of a file encoding, but got ${
+				inspectWithKind(options)
+			}.`);
+
+			error.code = 'ERR_INVALID_OPT_VALUE';
+			throw error;
+		}
 	}
 
-	if (options === '') {
-		throw new Error('Expected a valid encoding (for example `utf8` and `base64`), but got \'\' (empty string).');
+	const encoding = typeof options === 'string' ? options : options.encoding;
+
+	if (encoding === '') {
+		const error = new TypeError('Expected a valid encoding (for example `utf8` and `base64`), but got \'\' (empty string).');
+
+		error.code = 'ERR_INVALID_OPT_VALUE_ENCODING';
+		throw error;
 	}
 
-	if (filePath) {
-		return promisifiedReadFile(...args);
+	try {
+		return await promisifiedReadFile(filePath || 0, options);
+	} catch (err) {
+		if (err.code === 'EAGAIN') {
+			if (encoding) {
+				return '';
+			}
+
+			return Buffer.alloc(0);
+		}
+
+		throw err;
 	}
-
-	const encoding = typeof options === 'string' ? options : (options || {}).encoding;
-
-	if (/^utf-?8$/i.test(encoding)) {
-		return getStdin();
-	}
-
-	const buf = await getStdin.buffer();
-
-	if (encoding) {
-		return buf.toString(encoding);
-	}
-
-	return buf;
 };
